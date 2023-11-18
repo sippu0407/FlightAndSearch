@@ -1,6 +1,9 @@
 const express=require('express');
 const bodyParser=require('body-parser');
 const {PORT}=require('./config/severConfig');
+
+const {City}=require('./models/index');
+
 const setupAndStartServer=async()=>{
 
     //intialize express app
@@ -11,7 +14,10 @@ const setupAndStartServer=async()=>{
 
     app.listen(PORT,()=>{
         
+        console.log(City);
         console.log(`server is running on PORT : ${PORT}`); //writing in tempelated string.
+
+        
     })
 
 }
