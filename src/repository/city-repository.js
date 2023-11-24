@@ -2,10 +2,10 @@ const {City}=require('../models/index');
 
 class CityRepository{
     
-    async createCity({name}){
+    async createCity(data){
       
         try {
-            const city=await City.create({name});  // City.create({name:"dwarka-delhi"}) -> it return js-object
+            const city=await City.create(data);  // City.create({name:"dwarka-delhi"}) -> it return js-object
             return city;
         } catch (error) {
             console.log("error occured at repository layer");
@@ -31,11 +31,12 @@ class CityRepository{
             throw {error}
         }
     }
-    async updateCity({cityId,data}){
+    async updateCity(cityId,data){
              try {
               
-            const [NoOfCityDeleted,cities]=await City.update(data,{where:{id:cityId}}); // update function takes 2-js-object as argv.
-            return cities;
+            const [NoOfCityUpdated,cities]=await City.update(data,{where:{id:cityId}}); // update function takes 2-js-object as argv
+
+            return NoOfCityUpdated;
         } catch (error) {
             console.log("error occured at repository layer");
             throw {error};

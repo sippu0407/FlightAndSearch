@@ -69,13 +69,24 @@ const get=async (req,res)=>{
 //PATCH : /city/:id + body --> req.params.id + req.body
 const update=async (req,res)=>{
     try {
-         const cities=await cityService.updateCity(req.params.id,req.body); // req.body= {name:"varanasi"}
-        return res.status(200).json({           // we give response as json
+         const NoOfCityUpdated=await cityService.updateCity(req.params.id,req.body); // req.body= {name:"varanasi"}
+        
+         if (NoOfCityUpdated=== 0) {
+            // No rows were updated, meaning there is no row with id: 49
+            return res.json({
+                success: false,
+                message: "City not found",
+                err: {}
+            });
+        } else {
+        
+         return res.status(200).json({           // we give response as json
         data:cities,
         success:true,                               
         message:"successfully updated city",
         err:{}
-    })
+      })
+   }
   } catch (error) {
     console.log(error);
      return res.status(500).json({           // we give response as json

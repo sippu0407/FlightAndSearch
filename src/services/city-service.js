@@ -1,14 +1,16 @@
 const {CityRepository}=require('../repository/index');
 
+
 class CityService{
 
     constructor(){
-        const cityRepository=new CityRepository();
+        this.cityRepository=new CityRepository();
     }
 
-    async createCity({name}){
+
+    async createCity(data){
         try {
-            const city= await this.cityRepository.createCity(name);
+            const city= await this.cityRepository.createCity(data);
             return city;
         } catch (error) {
             console.log("error occured in city services");
@@ -38,10 +40,10 @@ class CityService{
 
      }
 
-      async updateCity({cityId,data}){ 
+      async updateCity(cityId,data){ 
           try {
-            const city=await this.cityRepository.updateCity(cityId);
-            return city;
+            const numberOfCitiesUpdated=await this.cityRepository.updateCity(cityId,data);
+            return numberOfCitiesUpdated;
         } catch (error) {
             console.log("error occured in city services");
             throw {error};
