@@ -44,6 +44,29 @@ const destroy=async (req,res)=>{
   }
 }
 
+//GET -> /city + query -->req.query if there is any filteration
+const getAll=async (req,res)=>{
+    try {
+        const cities=await cityService.getAllCity(req.query); // req.query=? para
+        return res.status(200).json({           // we give response as json
+        data:cities,
+        success:true,                               
+        message:"successfully fetched city",
+        err:{}
+    })
+    
+  } catch (error) {
+     console.log(error);
+     return res.status(500).json({           // we give response as json
+        data:{},     // data is empty object
+        success:false,    // failed                           
+        message:"not able to fetch the data", //
+        err:error   // returning whole error object which is not recommended
+    })
+  }
+
+}
+
 //GET -> /city/:id  -->req.params.id
 const get=async (req,res)=>{
     try {
@@ -102,5 +125,6 @@ module.exports={
     create,
     destroy,
     get,
-    update
+    update,
+    getAll
 }

@@ -18,6 +18,17 @@ class CityService{
         }
     }
 
+     async getAllCity(filter){
+         try {
+          const cities=await this.cityRepository.getAllCity({name:filter.name});
+          return cities;
+        } catch (error) {
+            console.log("error occured in city services");
+            throw {error};
+        }
+
+     }
+
      async getCity(cityId){
          try {
           const cities=await this.cityRepository.getCity(cityId);
