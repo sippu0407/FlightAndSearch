@@ -29,10 +29,10 @@ class AirplaneRepository{
     }
 
     async getAirplane(airplaneId){
-        const airplane=await Airplane.findByPk(airplaneId);
-        return airplane;
+        
         try {
-            
+            const airplane=await Airplane.findByPk(airplaneId);
+            return airplane;
         } catch (error) {
             console.log("error occured in repository layer");
             throw {error};
