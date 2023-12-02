@@ -28,7 +28,7 @@ async createFlight(data){
     try {
 
     const airplane= await this.airplaneRepository.getAirplane(data.airplaneId);
-    const flight= await this.flightRepository.createFlight({...data,totalSeat:airplane.capacity});
+    const flight= await this.flightRepository.createFlight({...data,totalSeats:airplane.capacity});
     return flight;
         
     } catch (error) {
@@ -38,6 +38,21 @@ async createFlight(data){
   
 
  }
+
+ async getAllFlight(filter){
+ 
+    try {
+    const flights= await this.flightRepository.getAllFlight(filter);
+    return flights;
+        
+    } catch (error) {
+        console.log("error occured in service layer");
+        throw {error}
+    }
+  
+
+ }
+
 
 
 
